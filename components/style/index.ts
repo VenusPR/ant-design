@@ -105,10 +105,18 @@ export const genCommonStyle = (token: DerivativeToken, componentPrefixCls: strin
 
   const rootPrefixSelector = `[class^="${componentPrefixCls}"], [class*=" ${componentPrefixCls}"]`;
 
+  // Space component don't apply extra font style
+  // https://github.com/ant-design/ant-design/issues/40315
+  const fontStyle = componentPrefixCls.endsWith(`-space`)
+    ? {}
+    : {
+        fontFamily,
+        fontSize,
+      };
+
   return {
     [rootPrefixSelector]: {
-      fontFamily,
-      fontSize,
+      ...fontStyle,
       boxSizing: 'border-box',
 
       '&::before, &::after': {
