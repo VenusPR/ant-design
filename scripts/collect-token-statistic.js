@@ -36,9 +36,9 @@ styleFiles.forEach((file) => {
   let useStyle = () => {};
   if (file.includes('grid')) {
     const { useColStyle, useRowStyle } = require(file);
-    useStyle = () => {
-      useRowStyle();
-      useColStyle();
+    useStyle = (...args) => {
+      useRowStyle(...args);
+      useColStyle(...args);
     };
   } else {
     useStyle = require(file).default;
